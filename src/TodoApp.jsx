@@ -1,24 +1,38 @@
-import { useGetTodosQuery } from './store/apis/todosApi';
+import { useState } from 'react';
+import { useGetTodoQuery, useGetTodosQuery } from './store/apis/todosApi';
 
 export const TodoApp = () => {
-  const { data: todos = [], isLoading, isFetching } = useGetTodosQuery();
+  const [todoId, setTodoId] = useState(1);
+  // const { data: todos = [], isLoading, isFetching } = useGetTodosQuery();
+  const { data: todo, isLoading, isFetching } = useGetTodoQuery(todoId);
+
+  const nextTodo = () => {
+    setTodoId(todoId + 1);
+  };
+
+  const prevTodo = () => {
+    if (todoId === 1) return;
+    setTodoId(todoId - 1);
+  };
+
   return (
     <>
       <h1>Todos - RTK Query</h1>
       <hr />
       <h4>isLoading: {isLoading ? 'True' : 'False'}</h4>
-
-      <pre>...</pre>
-      <ul>
+      <pre>{JSON.stringify(todo)}</pre>
+      <button disabled={todoId === 1} onClick={prevTodo}>
+        Previus Todo
+      </button>{' '}
+      <button onClick={nextTodo}>Next Todo</button>
+      {/* <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
             <strong>{todo.completed ? '✅' : '❌'}: </strong>
             {todo.title}
           </li>
         ))}
-      </ul>
-
-      <button>Next Todo</button>
+      </ul> */}
     </>
   );
 };
