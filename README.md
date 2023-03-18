@@ -1,5 +1,9 @@
-# Pokemon App
+# Learn redux-toolkit
 
-App builded to learn redux toolkit and RTK
+Different apps buit to learn redux toolkit and RTK
+
+- Counter app
+- Pokemon app
+- Todos app with RTK Query
 
 Made with love
